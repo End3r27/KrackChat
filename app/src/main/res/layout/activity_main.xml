@@ -15,14 +15,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:menu="@menu/bottom_navigation_menu"
-        app:labelVisibilityMode="labeled"
-        app:itemIconSize="24dp"
-        app:itemPaddingTop="5dp"
-        app:itemPaddingBottom="5dp"/>
+<com.google.android.material.bottomnavigation.BottomNavigationView
+    android:id="@+id/bottomNavigation"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:menu="@menu/bottom_navigation_menu"
+    app:labelVisibilityMode="labeled"
+    app:itemIconTint="@color/bottom_nav_item_color"
+    app:itemTextColor="@color/bottom_nav_item_color"
+    android:background="@android:color/black" />
 </androidx.constraintlayout.widget.ConstraintLayout>
