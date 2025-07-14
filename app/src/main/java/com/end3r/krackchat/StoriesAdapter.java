@@ -1,10 +1,8 @@
-// StoriesAdapter.java
 package com.end3r.krackchat;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -42,19 +40,15 @@ public class StoriesAdapter extends RecyclerView.Adapter<StoriesAdapter.StoryVie
     }
 
     static class StoryViewHolder extends RecyclerView.ViewHolder {
-        ImageView storyImage;
         TextView storyUsername;
 
         StoryViewHolder(@NonNull View itemView) {
             super(itemView);
-            storyImage = itemView.findViewById(R.id.storyImage);
             storyUsername = itemView.findViewById(R.id.storyUsername);
         }
 
         void bind(Story story, OnStoryClickListener listener) {
             storyUsername.setText(story.getUsername());
-            // Load story image here (using Glide or similar)
-            // Glide.with(itemView.getContext()).load(story.getImageUrl()).into(storyImage);
 
             itemView.setOnClickListener(v -> {
                 if (listener != null) {
@@ -64,4 +58,3 @@ public class StoriesAdapter extends RecyclerView.Adapter<StoriesAdapter.StoryVie
         }
     }
 }
-
