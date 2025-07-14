@@ -1,5 +1,6 @@
 package com.end3r.krackchat;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -103,9 +104,16 @@ public class MessagesFragment extends Fragment implements ChatsAdapter.OnChatCli
         chatsAdapter.notifyDataSetChanged();
     }
 
-    @Override
-    public void onChatClick(Chat chat) {
-        Toast.makeText(getContext(), "Opening chat with " + chat.getUsername(), Toast.LENGTH_SHORT).show();
-        // Here you would typically open a chat activity or fragment
-    }
+
+@Override
+public void onChatClick(Chat chat) {
+    openChat(chat);
+}
+
+private void openChat(Chat chat) {
+    Intent intent = new Intent(getContext(), ChatActivity.class);
+    intent.putExtra("chatId", chat.getId());
+    intent.putExtra("username", chat.getUsername());
+    startActivity(intent);
+}
 }
