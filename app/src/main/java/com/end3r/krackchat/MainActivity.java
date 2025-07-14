@@ -2,6 +2,7 @@ package com.end3r.krackchat;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,8 +22,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class MainActivity extends AppCompatActivity {
 
     public ViewPager getViewPager() {
-    return viewPager;
-}
+        return viewPager;
+    }
     private ViewPager viewPager;
     private BottomNavigationView bottomNavigationView;
     private PagerAdapter pagerAdapter;
@@ -30,12 +31,28 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Check if the user is logged in
+        if (!isLoggedIn()) {
+            // If not logged in, start the registration activity
+            Intent intent = new Intent(this, RegistrationActivity.class);
+            startActivity(intent);
+            finish(); // Close the MainActivity
+            return;
+        }
+
         setContentView(R.layout.activity_main);
 
         setupFullscreen();
         initViews();
         setupViewPager();
         setupBottomNavigation();
+    }
+
+    private boolean isLoggedIn() {
+        // TODO: Implement your login check here
+        // This is a placeholder, replace with your actual authentication logic
+        return false; // Return true if the user is logged in, false otherwise
     }
 
     private void setupFullscreen() {
