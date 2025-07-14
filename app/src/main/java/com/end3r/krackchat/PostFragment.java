@@ -1,6 +1,5 @@
 package com.end3r.krackchat;
 
-
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -42,6 +41,7 @@ public class PostFragment extends Fragment {
         initViews(view);
         setupTextWatcher();
         setupClickListeners();
+        handlePassedImage();
     }
 
     private void initViews(View view) {
@@ -72,6 +72,19 @@ public class PostFragment extends Fragment {
         attachedImageView.setOnClickListener(v -> removeAttachment());
     }
 
+    private void handlePassedImage() {
+        Bundle args = getArguments();
+        if (args != null && args.containsKey("selectedImageUri")) {
+            String uriString = args.getString("selectedImageUri");
+            if (uriString != null) {
+                attachedFileUri = Uri.parse(uriString);
+                attachedImageView.setImageURI(attachedFileUri);
+                attachedImageView.setVisibility(View.VISIBLE);
+                updatePostButtonState();
+            }
+        }
+    }
+
     private void updatePostButtonState() {
         String text = postEditText.getText().toString().trim();
         boolean hasContent = !text.isEmpty() || attachedFileUri != null;
@@ -88,7 +101,17 @@ public class PostFragment extends Fragment {
             return;
         }
 
+// If the Post constructor expects an attachment ID (int) instead of URI string
+        Post post = new Post(
+                generatePostId(),
+                getCurrentUsername(),
+                content,
+                attachedFileUri != null ? 1 : 0, // or some attachment ID
+                System.currentTimeMillis()
+        );
+
         // Handle post creation logic here
+        // You can add your post to a database or send to server
         Toast.makeText(getContext(), "Post created successfully!", Toast.LENGTH_SHORT).show();
 
         // Reset the form
@@ -97,16 +120,18 @@ public class PostFragment extends Fragment {
     }
 
     private void showAttachmentOptions() {
-        // For simplicity, we'll show a dialog or you can implement a bottom sheet
         androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(getContext());
         builder.setTitle("Attach File")
-                .setItems(new String[]{"Photo/Video", "Document"}, (dialog, which) -> {
+                .setItems(new String[]{"Photo/Video", "Document", "Camera"}, (dialog, which) -> {
                     switch (which) {
                         case 0:
                             openGallery();
                             break;
                         case 1:
                             openFilePicker();
+                            break;
+                        case 2:
+                            navigateToCamera();
                             break;
                     }
                 })
@@ -125,10 +150,27 @@ public class PostFragment extends Fragment {
         startActivityForResult(fileIntent, FILE_PICKER_REQUEST_CODE);
     }
 
+private void navigateToCamera() {
+    // Navigate to CameraFragment using ViewPager
+    MainActivity mainActivity = (MainActivity) getActivity();
+    if (mainActivity != null) {
+        mainActivity.getViewPager().setCurrentItem(2); // Assuming CameraFragment is at position 2
+    }
+}
+
     private void removeAttachment() {
         attachedFileUri = null;
         attachedImageView.setVisibility(View.GONE);
         updatePostButtonState();
+    }
+
+    private String generatePostId() {
+        return "post_" + System.currentTimeMillis();
+    }
+
+    private String getCurrentUsername() {
+        // Replace with your actual user management logic
+        return "current_user";
     }
 
     @Override

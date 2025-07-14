@@ -5,19 +5,16 @@
     android:layout_height="match_parent"
     android:background="@color/black">
 
-    <!-- Preview Image -->
+    <!-- ImageView for previewing the selected image -->
     <ImageView
         android:id="@+id/previewImageView"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_margin="16dp"
-        android:background="@drawable/camera_preview_background"
         android:scaleType="centerCrop"
-        android:src="@drawable/ic_camera_placeholder"
-        app:layout_constraintBottom_toTopOf="@+id/buttonContainer"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/buttonContainer"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <!-- Button Container -->
     <LinearLayout
@@ -42,42 +39,38 @@
             android:textStyle="bold"
             android:visibility="gone" />
 
-        <!-- Camera and Gallery Buttons -->
-        <LinearLayout
+        <!-- Create Post Button (Initially Hidden) -->
+        <Button
+            android:id="@+id/createPostButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="2">
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/post_button_background"
+            android:text="Create Post"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:visibility="gone" />
 
-            <Button
-                android:id="@+id/cameraButton"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_weight="1"
-                android:background="@drawable/camera_button_background"
-                android:drawableTop="@drawable/ic_camera"
-                android:drawablePadding="8dp"
-                android:padding="16dp"
-                android:text="Camera"
-                android:textColor="@android:color/white"
-                android:textStyle="bold" />
+        <!-- Camera Button -->
+        <Button
+            android:id="@+id/cameraButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/post_button_background"
+            android:text="Open Camera"
+            android:textColor="@android:color/white"
+            android:textStyle="bold" />
 
-            <Button
-                android:id="@+id/galleryButton"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_weight="1"
-                android:background="@drawable/gallery_button_background"
-                android:drawableTop="@drawable/ic_gallery"
-                android:drawablePadding="8dp"
-                android:padding="16dp"
-                android:text="Gallery"
-                android:textColor="@android:color/white"
-                android:textStyle="bold" />
-
-        </LinearLayout>
+        <!-- Gallery Button -->
+        <Button
+            android:id="@+id/galleryButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/post_button_background"
+            android:text="Open Gallery"
+            android:textColor="@android:color/white"
+            android:textStyle="bold" />
 
     </LinearLayout>
 

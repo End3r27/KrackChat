@@ -20,6 +20,9 @@ public class Post {
         this.isUpvoted = false;
     }
 
+    public Post(String id, String currentUsername, String content, int upvoteCount, long l) {
+    }
+
     // Getters
     public String getId() { return id; }
     public String getUsername() { return username; }

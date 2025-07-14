@@ -3,4 +3,7 @@
     <string name="post_story">Post Story</string>
     <string name="camera">Camera</string>
     <string name="camera_preview_description">Camera preview</string>
+    <string name="title_home">Home</string>
+    <string name="title_messages">Messages</string>
+    <string name="title_profile">Profile</string>
 </resources>
